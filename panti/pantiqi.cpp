@@ -220,7 +220,7 @@ int algorithm(vector<Flow>& flows, vector<Port>& ports, vector<Result>& res)
 	}
 	for (const auto& flow : flows)
 	{
-		if (!flow.sendtime)
+		if (!flow.issend)
 		{
 			cout << "有流未被发送，未发送的流编号为" << flow.id << endl;
 			return 0;
