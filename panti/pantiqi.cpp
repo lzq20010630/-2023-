@@ -218,6 +218,14 @@ int algorithm(vector<Flow>& flows, vector<Port>& ports, vector<Result>& res)
 		port.waitqueue.push_back(flow);
 		flow.issend = true;
 	}
+	for (const auto& flow : flows)
+	{
+		if (!flow.sendtime)
+		{
+			cout << "有流未被发送，未发送的流编号为" << flow.id << endl;
+			return 0;
+		}
+	}
 	return updateport(ports);
 }
 double best(vector<Flow>& flows, vector<Port>& ports)
