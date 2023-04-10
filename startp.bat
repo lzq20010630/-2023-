@@ -1,2 +1,0 @@
-pantiqi.exe
-pause

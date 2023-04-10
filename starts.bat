@@ -1,2 +1,0 @@
-shujushengcheng.exe
-pause
