@@ -185,6 +185,7 @@ int algorithm(vector<Flow>& flows, vector<Port>& ports, vector<Result>& res)
 	for(const auto& iter:res)
 	{
 		int t = iter.sendtime;
+
 		if (iter.flowid >= flows.size() || iter.flowid < 0)
 		{
 			cout << "流id不存在，错误结果为" << t << ',' << iter.flowid << ',' << iter.portid << endl;
@@ -213,7 +214,6 @@ int algorithm(vector<Flow>& flows, vector<Port>& ports, vector<Result>& res)
 			cout << "流被重复发送，错误结果为" << t << ',' << iter.flowid << ',' << iter.portid << endl;
 			return 0;
 		}
-		/*___________________________________________________________________________________________________*/
 		flow.sendtime = t;
 		port.waitqueue.push_back(flow);
 		flow.issend = true;
@@ -234,7 +234,7 @@ double best(vector<Flow>& flows, vector<Port>& ports)
 	long long int cansendspeed = 0;
 	for (int i = 0; i < flows.size(); ++i)
 	{
-		needspeed += (long long int)(flows[i].speed) * flows[i].needtime;
+		needspeed += long long int(flows[i].speed) * flows[i].needtime;
 	}
 	for (int i = 0; i < ports.size(); ++i)
 	{
@@ -250,6 +250,8 @@ int main()
 	vector<Result> res;
 	int alltime = 0;
 	double allbest = 0;
+	double score = 0;
+	double bestscore = 0;
 	string path;
 	while (true)
 	{
@@ -262,12 +264,18 @@ int main()
 		allbest += thisbest;
 		cout <<"理论最优：" << thisbest << endl;
 		cout <<"实际结果：" << thistime << endl;
+		cout << "分数：" << 100 / (log(thistime) / log(10)) << endl;
+		cout << "理论最高分数：" << 100 / (log(thisbest) / log(10)) << endl;
+		score += 100 / (log(thistime) / log(10));
+		bestscore += 100 / (log(thisbest) / log(10));
 		++No;
 		flows.clear();
 		ports.clear();
 		res.clear();
 	}
 	cout << "总和理论最优：" << allbest << endl;
-	cout << "总和实际结果：" << alltime;
+	cout << "总和实际结果：" << alltime << endl;
+	cout << "总分数：" << score/No << endl;
+	cout << "总理论最高分数：" << bestscore / No << endl;
 	return 0;
 }
