@@ -255,7 +255,7 @@ double best(vector<Flow>& flows, vector<Port>& ports)
 	long long int cansendspeed = 0;
 	for (int i = 0; i < flows.size(); ++i)
 	{
-		needspeed += long long int(flows[i].speed) * flows[i].needtime;
+		needspeed += (long long int)flows[i].speed * flows[i].needtime;
 	}
 	for (int i = 0; i < ports.size(); ++i)
 	{
@@ -283,10 +283,12 @@ int main()
 		double thisbest = best(flows, ports);
 		alltime += thistime;
 		allbest += thisbest;
-		//cout <<"理论最优：" << thisbest << endl;
-		//cout <<"实际结果：" << thistime << endl;
+		cout << "第" << No << "号文件："<<endl;
+		cout <<"理论最优：" << thisbest << endl;
+		cout <<"实际结果：" << thistime << endl;
 		cout << "分数：" << 100 / (log(thistime) / log(10)) << endl;
 		cout << "理论最高分数：" << 100 / (log(thisbest) / log(10)) << endl;
+		cout << endl;
 		score += 100 / (log(thistime) / log(10));
 		bestscore += 100 / (log(thisbest) / log(10));
 		++No;
@@ -294,8 +296,8 @@ int main()
 		ports.clear();
 		res.clear();
 	}
-	//cout << "总和理论最优：" << allbest << endl;
-	//cout << "总和实际结果：" << alltime << endl;
+	cout << "总和理论最优：" << allbest << endl;
+	cout << "总和实际结果：" << alltime << endl;
 	cout << "总分数：" << setprecision(10) << score/No << endl;
 	cout << "总理论最高分数：" << setprecision(10) << bestscore / No << endl;
 
