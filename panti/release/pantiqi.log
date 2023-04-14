@@ -1,0 +1,10 @@
+﻿  源.cpp
+D:\B20060411_competition\pantiqi\源.cpp(210,19): warning C4018: “>=”: 有符号/无符号不匹配
+D:\B20060411_competition\pantiqi\源.cpp(215,19): warning C4018: “>=”: 有符号/无符号不匹配
+D:\B20060411_competition\pantiqi\源.cpp(256,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\B20060411_competition\pantiqi\源.cpp(260,20): warning C4018: “<”: 有符号/无符号不匹配
+  正在生成代码
+  Previous IPDB not found, fall back to full compilation.
+  All 600 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成代码的生成
+  pantiqi.vcxproj -> D:\B20060411_competition\pantiqi\Release\pantiqi.exe
