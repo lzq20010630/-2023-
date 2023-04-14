@@ -6,6 +6,8 @@
 #include<map>
 #include<limits.h>
 #include<deque>
+#include <iomanip>
+#include<cmath>
 using namespace std;
 class Flow
 {
@@ -62,6 +64,11 @@ Result::Result(int f, int p, int s)
 bool Input(string path, vector<Flow>& flows, vector<Port>& ports, vector<Result>& results)
 {
 	ifstream input;
+	int allspeed = 0;
+	int alltime = 0;
+	int allportspeed = 0;
+	int flowcount = 0;
+	int portcount = 0;
 	string path1 = path + "/flow.txt";
 	string path2 = path + "/port.txt";
 	string path3 = path + "/result.txt";
@@ -77,6 +84,9 @@ bool Input(string path, vector<Flow>& flows, vector<Port>& ports, vector<Result>
 		input >> flow.id >> t >> flow.speed >> t >> flow.begintime >> t >> flow.needtime;
 		if (flow.id == -1)
 			break;
+		allspeed += flow.speed;
+		alltime += flow.needtime;
+		++flowcount;
 		flows.push_back(flow);
 	}
 	input.close();
@@ -94,9 +104,20 @@ bool Input(string path, vector<Flow>& flows, vector<Port>& ports, vector<Result>
 		port.speed = port.maxspeed;
 		if (port.id == -1)
 			break;
+		allportspeed += port.speed;
+		++portcount;
 		ports.push_back(port);
 	}
 	input.close();
+	//cout << "流带宽总和    ：" << allspeed << endl;
+	//cout << "流占用时间总和：" << alltime << endl;
+	//cout << "端口带宽总和  ：" << allportspeed << endl;
+	//cout << "流数量        ：" << flowcount << endl;
+	//cout << "端口数量      ：" << portcount << endl;
+	//cout << "流带宽平均值  ：" << allspeed / double(flowcount) << endl;
+	//cout << "端口带宽平均值：" << allportspeed / double(portcount) << endl;
+	//cout << "流占用时间平均值：" << alltime / double(flowcount) << endl;
+	//cout << endl;
 	/*port输入完毕*/
 	input.open(path3, ios::in);
 	if (!input.is_open())
@@ -188,12 +209,12 @@ int algorithm(vector<Flow>& flows, vector<Port>& ports, vector<Result>& res)
 
 		if (iter.flowid >= flows.size() || iter.flowid < 0)
 		{
-			cout << "流id不存在，错误结果为" << t << ',' << iter.flowid << ',' << iter.portid << endl;
+			cout << "流id不存在，错误结果为"  << iter.flowid << ',' << iter.portid << ','<< t << endl;
 			return 0;
 		}
 		if (iter.portid >= ports.size() || iter.portid < 0)
 		{
-			cout << "端口id不存在，错误结果为" << t << ',' << iter.flowid << ',' << iter.portid << endl;
+			cout << "端口id不存在，错误结果为"  << iter.flowid << ',' << iter.portid << ','<< t << endl;
 			return 0;
 		}
 
@@ -201,17 +222,17 @@ int algorithm(vector<Flow>& flows, vector<Port>& ports, vector<Result>& res)
 		Port &port = ports[iter.portid];
 		if (t < flow.begintime)
 		{
-			cout << "流发送时间小于进入设备时间，错误结果为" << t << ',' << iter.flowid << ',' << iter.portid << endl;
+			cout << "流发送时间小于进入设备时间，错误结果为"  << iter.flowid << ',' << iter.portid << ','<< t << endl;
 			return 0;
 		}
 		if (flow.speed > port.maxspeed)
 		{
-			cout << "流带宽大于端口最大带宽，错误结果为" << t << ',' << iter.flowid << ',' << iter.portid << endl;
+			cout << "流带宽大于端口最大带宽，错误结果为"  << iter.flowid << ',' << iter.portid << ','<< t << endl;
 			return 0;
 		}
 		if (flow.issend)
 		{
-			cout << "流被重复发送，错误结果为" << t << ',' << iter.flowid << ',' << iter.portid << endl;
+			cout << "流被重复发送，错误结果为"  << iter.flowid << ',' << iter.portid << ','<< t << endl;
 			return 0;
 		}
 		flow.sendtime = t;
@@ -262,8 +283,8 @@ int main()
 		double thisbest = best(flows, ports);
 		alltime += thistime;
 		allbest += thisbest;
-		cout <<"理论最优：" << thisbest << endl;
-		cout <<"实际结果：" << thistime << endl;
+		//cout <<"理论最优：" << thisbest << endl;
+		//cout <<"实际结果：" << thistime << endl;
 		cout << "分数：" << 100 / (log(thistime) / log(10)) << endl;
 		cout << "理论最高分数：" << 100 / (log(thisbest) / log(10)) << endl;
 		score += 100 / (log(thistime) / log(10));
@@ -273,9 +294,10 @@ int main()
 		ports.clear();
 		res.clear();
 	}
-	cout << "总和理论最优：" << allbest << endl;
-	cout << "总和实际结果：" << alltime << endl;
-	cout << "总分数：" << score/No << endl;
-	cout << "总理论最高分数：" << bestscore / No << endl;
+	//cout << "总和理论最优：" << allbest << endl;
+	//cout << "总和实际结果：" << alltime << endl;
+	cout << "总分数：" << setprecision(10) << score/No << endl;
+	cout << "总理论最高分数：" << setprecision(10) << bestscore / No << endl;
+
 	return 0;
 }
