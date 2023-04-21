@@ -279,6 +279,7 @@ int main()
 		path = "../data/" + to_string(No);
 		if (!Input(path, flows, ports,res))
 			break;
+		stable_sort(res.begin(), res.end(), [](const Result& x, const Result& y) {return x.sendtime < y.sendtime; });
 		int thistime= algorithm(flows, ports, res);
 		double thisbest = best(flows, ports);
 		alltime += thistime;
