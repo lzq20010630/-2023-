@@ -1,0 +1,14 @@
+﻿  源.cpp
+D:\B20060411_competition\pantiqi\源.cpp(210,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\B20060411_competition\pantiqi\源.cpp(220,19): warning C4018: “<”: 有符号/无符号不匹配
+D:\B20060411_competition\pantiqi\源.cpp(225,29): warning C4018: “>=”: 有符号/无符号不匹配
+D:\B20060411_competition\pantiqi\源.cpp(230,29): warning C4018: “>=”: 有符号/无符号不匹配
+D:\B20060411_competition\pantiqi\源.cpp(276,16): warning C4018: “>=”: 有符号/无符号不匹配
+D:\B20060411_competition\pantiqi\源.cpp(325,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\B20060411_competition\pantiqi\源.cpp(329,20): warning C4018: “<”: 有符号/无符号不匹配
+  正在生成代码
+  2 of 783 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    5 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  pantiqi.vcxproj -> D:\B20060411_competition\pantiqi\Release\pantiqi.exe
